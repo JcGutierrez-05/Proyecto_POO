@@ -23,3 +23,35 @@ class ClienteFuncionalidad:
             )
             cliente.save()
             print(f"Usuario {nombre} fue creado exitosamente")
+    
+    @staticmethod
+    def modificar_cliente(email, nuevo_nombre=None, nuevo_telefono=None, nueva_direccion=None):
+        try:
+            cliente = Cliente.objects.get(cliente_mail=email)
+            if nuevo_nombre:
+                cliente.cliente_nom = nuevo_nombre
+            if nuevo_telefono:
+                cliente.cliente_tel = nuevo_telefono
+            if nueva_direccion:
+                cliente.cliente_direc = nueva_direccion
+            cliente.save()
+            print(f"Usuario {email} ha sido modificado correctamente")
+        except Cliente.DoesNotExist:
+            print("Error: No se encontró un cliente con ese correo")
+
+    @staticmethod
+    def mostrar_cliente(email):
+        try:
+            cliente = Cliente.objects.get(cliente_mail=email)
+            print(f"Nombre: {cliente.cliente_nom}, Email: {cliente.cliente_mail}, Teléfono: {cliente.cliente_tel}, Dirección: {cliente.cliente_direc}")
+        except Cliente.DoesNotExist:
+            print("Error: No se encontró un cliente con ese correo")
+
+    @staticmethod
+    def eliminar_cliente(email):
+        try:
+            cliente = Cliente.objects.get(cliente_mail=email)
+            cliente.delete()
+            print(f"Usuario {email} ha sido eliminado correctamente")
+        except Cliente.DoesNotExist:
+            print("Error: No se encontró un cliente con ese correo")
