@@ -9,7 +9,7 @@ from pro_miscelania.models import FacturaVenta
 from pro_miscelania.models import Producto
 from pro_miscelania.models import Proveedor
 
-class ClienteFuncionalidad:
+class GestonCliente:
     @staticmethod
     def crear_cliente(nombre, email, telefono, direccion):
         if Cliente.objects.filter(cliente_mail=email).exists():
@@ -25,7 +25,7 @@ class ClienteFuncionalidad:
             print(f"Usuario {nombre} fue creado exitosamente")
     
     @staticmethod
-    def modificar_cliente(email, nuevo_nombre=None, nuevo_telefono=None, nueva_direccion=None):
+    def editar_cliente(email, nuevo_nombre=None, nuevo_telefono=None, nueva_direccion=None):
         try:
             cliente = Cliente.objects.get(cliente_mail=email)
             if nuevo_nombre:
@@ -55,3 +55,47 @@ class ClienteFuncionalidad:
             print(f"Usuario {email} ha sido eliminado correctamente")
         except Cliente.DoesNotExist:
             print("Error: No se encontró un cliente con ese correo")
+
+class GestorCiudad:
+    pass
+
+class GestionCategoria:
+    @staticmethod
+    def crear_categoria(nombre):
+        if Categoria.objects.filter(cate_nom=nombre).exists():
+            print("Error: la categoria ya esta registrada")
+        else:
+            categoria = Categoria.objects.create(
+                cate_nom=nombre,
+            )
+            categoria.save()
+            print(f"la categoria {nombre} fue registrada exitosamente ")
+     
+     
+    def editar_categoria(nombre,nuevo_nombre=None):
+        try:
+            categoria = Categoria.objects.get(cate_nom=nombre)
+            if nuevo_nombre:
+                Categoria.cate_nom = nuevo_nombre
+            categoria.save()
+            print(f"La categoria {nombre} ha sido modificado correctamente")
+        except Categoria.DoesNotExist:
+            print("Error: No se encontró una categoria")
+
+  
+    def mostrar_cliente(nombre):
+        try:
+            categoria = Categoria.objects.get(cate_nom=nombre)
+            print(f"Nombre: {categoria.cate_nom}")
+        except Cliente.DoesNotExist:
+            print("Error: No se encontró una categoria")
+
+   
+    def eliminar_categoria(nombre):
+        try:
+            categoria = Categoria.objects.get(cate_nom=nombre)
+            categoria.delete()
+            print(f"la categoria: {nombre} ha sido eliminada correctamente")
+        except Cliente.DoesNotExist:
+            print("Error: No se encontró una categoria")
+
