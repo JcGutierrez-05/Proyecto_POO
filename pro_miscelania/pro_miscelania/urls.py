@@ -26,7 +26,7 @@ urlpatterns = [
     path('clientes/mostrar/<str:email>/', views.mostrar_cliente_view, name='mostrar_cliente'),
     path('clientes/eliminar/<str:email>/', views.eliminar_cliente_view, name='eliminar_cliente'),
 
-
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
